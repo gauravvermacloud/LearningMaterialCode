@@ -13,3 +13,15 @@ print(type(z))
 #blocks of code start after a tab, the block defining if, for etc end in :
 for x in range(5):
     print(x)
+
+# / is floating point devision // is integer devision
+
+print(10/2)
+
+print(10//2)
+
+x = 25/2
+#convert number to sting
+y = str(x)
+print(y)
+print(len(y))
