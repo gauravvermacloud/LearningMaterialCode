@@ -4,7 +4,7 @@ floatF = 77.0
 
 boolB = True
 
-print(intX)
+print(intX)>
 print(floatF)
 print(boolB)
 
