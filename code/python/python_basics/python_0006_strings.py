@@ -32,3 +32,6 @@ print(raw_string)
 
 s = "This is a string"
 print (s[2])
+
+#calling method
+print(s.upper())
