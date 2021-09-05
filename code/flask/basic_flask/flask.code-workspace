@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.pythonPath": "/home/gaurav/.msvscode.hdinsight/hdinsightJupyter/bin/python",
+    "python.defaultInterpreterPath": "/home/gaurav/.msvscode.hdinsight/hdinsightJupyter/bin/python",
+    "jupyter.jupyterLaunchTimeout": 240000
+  }
+}
