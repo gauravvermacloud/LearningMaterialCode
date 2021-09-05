@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """This module allows addition of two numbers.
     It allows using from command line as filename.py number1, number2 
     or importintg the module
