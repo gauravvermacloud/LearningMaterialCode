@@ -6,15 +6,15 @@
 """
 import sys
 
-def sum(x,y):
-    """Adds two numbers and returns the sum
+def sum(x:int,y:int) ->int:
+    """ Adds two numbers and returns the sum
 
     Args:
-        x (number): The first number to be added
-        y (number): The second number to be added
+        x (int): The first number to be added
+        y (int): The second number to be added
 
     Returns:
-        number: The sum of two numbers
+        int: The sum of two numbers
     """
     return x+y
 
@@ -22,8 +22,8 @@ def __print_sum__(x,y):
     """Prints the sum of two numbers
 
     Args:
-        x (number): The first number to be added
-        y (number): The second number to be added
+        x (int): The first number to be added
+        y (int): The second number to be added
     """
     print(sum(x,y))
 
