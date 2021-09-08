@@ -39,3 +39,45 @@ print(1 in t1)
 print(5 in t)
 print(1 not in t1)
 print(5 not in t1)
+
+print(tuple([1, 2, 3]))
+print(tuple("Hello"))
+
+############## Strings #####################
+s = "Hello world"
+print(len(s))
+
+print(' - '.join(["Hello", "world", "27"]))
+
+print("Hello world there".split(" "))
+
+print("This is {0} string being formatted with {1} and {0}".format(
+    "This", 7
+))
+
+print("This is {First} string being formatted with name values {Second} and {First}".format(
+    First="This", Second=7
+))
+
+
+############# range ######################
+
+x = range(5)
+print(x)
+
+for i in x:
+    print(i)
+
+l = list(range(2, 10, 3))
+print(l)
+
+l = list(range(10, 2, -2))
+print(l)
+
+c = [1, 2, 3, 4, 5]
+
+for i in enumerate(c):
+    print(i)
+
+for i, item in enumerate(c):
+    print(str(i)+" ---> "+str(item))
