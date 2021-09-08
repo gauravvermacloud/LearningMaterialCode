@@ -128,3 +128,14 @@ for key in d:
 
 for key, val in d.items():
     print(str(key) + " ---> "+val)
+
+################# set ######################
+
+lst = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
+st = set(lst)
+print(st)
+lst = list(st)
+print(lst)
+
+st = {1, 2, 3}
+print(st)
