@@ -55,7 +55,8 @@ print("This is {0} string being formatted with {1} and {0}".format(
     "This", 7
 ))
 
-print("This is {First} string being formatted with name values {Second} and {First}".format(
+print("""This is {First} string being formatted with name values 
+      {Second} and {First}""".format(
     First="This", Second=7
 ))
 
@@ -81,3 +82,38 @@ for i in enumerate(c):
 
 for i, item in enumerate(c):
     print(str(i)+" ---> "+str(item))
+
+################## List ###########################
+
+lst = "This is a list that is split".split()
+print(lst)
+print(lst[3])
+print(lst[-1])
+print(lst[-2])
+
+print(lst[2:5])
+
+lst2 = lst[:]
+print(lst2 is lst)
+print(lst2 == lst)
+
+
+lst = [1, 5, 3, 7, 2]
+lst.reverse()
+print(lst)
+
+lst.sort()
+print(lst)
+lst.sort(reverse=True)
+print(lst)
+
+
+def my_len(x):
+    return len(str(x))
+
+
+lst = [1, 25, 31, 17, 2, -11, -24]
+
+lst.sort(key=my_len)
+print(lst)
+#################
