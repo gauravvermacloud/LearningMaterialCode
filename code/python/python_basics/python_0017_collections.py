@@ -116,4 +116,15 @@ lst = [1, 25, 31, 17, 2, -11, -24]
 
 lst.sort(key=my_len)
 print(lst)
-#################
+
+################# dict ###############
+
+lst = [(1, "a"), (2, "b"), (3, "c")]
+d = dict(lst)
+print(d)
+
+for key in d:
+    print(str(key) + " ---> "+d[key])
+
+for key, val in d.items():
+    print(str(key) + " ---> "+val)
