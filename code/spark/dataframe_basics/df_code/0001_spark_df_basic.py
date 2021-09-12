@@ -49,3 +49,12 @@ data_frame.show()
 print(data_frame.columns)
 
 print(data_frame.describe().show())
+
+
+struct = [StructField("Id", IntegerType(), False),
+          StructField("Designation", StringType(), False)]
+designation_schema = StructType(fields=struct)
+data_frame_designation = spark.read.options(header='True').schema(designation_schema).csv(
+    '/home/gaurav/Documents/LearningMaterial/LearningMaterialCode/code/spark/dataframe_basics/df_code/Designation.csv')
+data_frame_designation.printSchema()
+data_frame_designation.show()
