@@ -1,0 +1,31 @@
+Date : 2021-09-18 12:08:28
+Directory : /home/gaurav/Documents/LearningMaterial/LearningMaterialCode/code/spark/dataframe_basics
+Total : 5 files,  84 codes, 2 comments, 36 blanks, all 122 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Python   |          2 |         64 |          2 |         33 |         99 |
+| CSV      |          3 |         20 |          0 |          3 |         23 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                     | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                        |          5 |         84 |          2 |         36 |        122 |
+| df_code                                                                                                                  |          5 |         84 |          2 |         36 |        122 |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                 | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /home/gaurav/Documents/LearningMaterial/LearningMaterialCode/code/spark/dataframe_basics/df_code/0001_spark_df_basic.py  | Python   |         40 |          0 |         21 |         61 |
+| /home/gaurav/Documents/LearningMaterial/LearningMaterialCode/code/spark/dataframe_basics/df_code/0002_spark_df_select.py | Python   |         24 |          2 |         12 |         38 |
+| /home/gaurav/Documents/LearningMaterial/LearningMaterialCode/code/spark/dataframe_basics/df_code/Department.csv          | CSV      |          4 |          0 |          1 |          5 |
+| /home/gaurav/Documents/LearningMaterial/LearningMaterialCode/code/spark/dataframe_basics/df_code/Designation.csv         | CSV      |          5 |          0 |          1 |          6 |
+| /home/gaurav/Documents/LearningMaterial/LearningMaterialCode/code/spark/dataframe_basics/df_code/Employees.csv           | CSV      |         11 |          0 |          1 |         12 |
+| Total                                                                                                                    |          |         84 |          2 |         36 |        122 |
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
