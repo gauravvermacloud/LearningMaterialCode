@@ -13,6 +13,10 @@ connection = pika.BlockingConnection(
 # Based on connection create a channel
 channel = connection.channel()
 
+# Now create a fanout exchange
+channel.exchange_declare(
+    exchange=constants.EXCHANGE_NAME, exchange_type='fanout')
+
 # Create a queue if needed and define the queue . This will be the queue where messages will be published
 channel.queue_declare(constants.QUEUE_NAME)
 

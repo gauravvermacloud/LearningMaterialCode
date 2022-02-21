@@ -1,0 +1,4 @@
+SERVER_ADDRESS = 'localhost'
+EXCHANGE_NAME = 'broadcast'
+SAMPLE_MESSAGE_FORMAT = "HELLO Number {}"
+SLEEP_TIME = 5
