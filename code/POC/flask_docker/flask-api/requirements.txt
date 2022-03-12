@@ -1,0 +1,12 @@
+black
+click
+Flask
+itsdangerous
+Jinja2
+MarkupSafe
+mypy-extensions
+pathspec
+platformdirs
+tomli
+typing-extensions
+Werkzeug
