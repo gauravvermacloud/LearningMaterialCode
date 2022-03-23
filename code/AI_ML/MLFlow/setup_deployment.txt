@@ -24,3 +24,10 @@ run the code
 mlflow models predict -m runs:/6eff6c3c90354c489b53eb2c6d4f7f40/model -i ./sample.csv --no-conda -t csv
 mlflow models predict -m models:/iris_data_predictor/1 -i ./sample.csv --no-conda -t csv
 mlflow models predict -m models:/iris_data_predictor/Production -i ./sample.csv --no-conda -t csv
+
+
+#To build a docker container
+export MLFLOW_TRACKING_URI='http://localhost:5000'
+mlflow models build-docker -m runs:/6eff6c3c90354c489b53eb2c6d4f7f40/model -n "image_name"
+mlflow models build-docker -m models:/iris_data_predictor/1 -n "image_name"
+mlflow models build-docker -m models:/iris_data_predictor/Production -n "image_name"
