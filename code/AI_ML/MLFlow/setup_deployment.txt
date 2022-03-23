@@ -1,0 +1,26 @@
+#For Web Deployment
+export MLFLOW_TRACKING_URI='http://localhost:5000'
+
+    mlflow models serve -m runs:/6eff6c3c90354c489b53eb2c6d4f7f40/model --no-conda --port 5001
+    mlflow models serve -m models:/iris_data_predictor/1 --no-conda --port 5001
+    mlflow models serve -m models:/iris_data_predictor/Production --no-conda --port 5001
+
+
+    POST
+    http://localhost:5001/invocations
+
+    {
+        "columns": ["sepal-lenght", "sepal-width","petal-lenght", "petal-width"],
+        "data":[[5.1,3.5,1.4,0.2]]
+    }
+
+
+
+
+#For Batch Processing
+export MLFLOW_TRACKING_URI='http://localhost:5000'
+run the code
+
+mlflow models predict -m runs:/6eff6c3c90354c489b53eb2c6d4f7f40/model -i ./sample.csv --no-conda -t csv
+mlflow models predict -m models:/iris_data_predictor/1 -i ./sample.csv --no-conda -t csv
+mlflow models predict -m models:/iris_data_predictor/Production -i ./sample.csv --no-conda -t csv
