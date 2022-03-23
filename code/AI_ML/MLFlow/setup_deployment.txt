@@ -31,3 +31,5 @@ export MLFLOW_TRACKING_URI='http://localhost:5000'
 mlflow models build-docker -m runs:/6eff6c3c90354c489b53eb2c6d4f7f40/model -n "image_name"
 mlflow models build-docker -m models:/iris_data_predictor/1 -n "image_name"
 mlflow models build-docker -m models:/iris_data_predictor/Production -n "image_name"
+
+docker run -p 5001:5001 "image_name"
