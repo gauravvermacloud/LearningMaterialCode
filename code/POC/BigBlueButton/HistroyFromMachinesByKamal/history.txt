@@ -1,0 +1,578 @@
+    1  su ubuntu
+    2  exit
+    3  su ubuntu
+    4  exit
+    5  wget -qO- https://ubuntu.bigbluebutton.org/bbb-install.sh | bash -s -- -v xenial-22 -s meetings-demo.edumarshal.com -e kamal@edumarshal.com -w -g
+    6  sudo apt-get purge bbb-demo
+    7  vi /opt/freeswitch/etc/freeswitch/autoload_configs/event_socket.conf.xml
+    8  sudo su
+    9  exit
+   10  su ubuntu
+   11  sudo vi /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
+   12  sudo bbb-conf --restart
+   13  sudo vi /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml
+   14  sudo vi /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
+   15  cd ~/greenlight/
+   16  docker exec greenlight-v2 bundle exec rake user:create["Administrator","admin@edumarshal.com","Edumarshal123@","admin"]
+   17  docker exec greenlight-v2 bundle exec rake user:create["Teacher","teacher@edumarshal.com","Teacher123@","user"]
+   18  vi .env 
+   19  docker-compose down
+   20  docker-compose up -d
+   21  docker run --rm --env-file .env bigbluebutton/greenlight:v2 bundle exec rake conf: check
+   22  docker run --rm --env-file .env bigbluebutton/greenlight:v2 bundle exec rake conf:check
+   23  bbb-conf --secret
+   24  exit
+   25  bbb-record --status
+   26  bbb-record --watch
+   27  cd /var/bigbluebutton/recording/status/recorded/
+   28  ls
+   29  cd ..
+   30  ls
+   31  cd archived/
+   32  ls
+   33  cd ..
+   34  ls
+   35  cd ~/
+   36  sudo vi /etc/cron.daily/bigbluebutton
+   37  exit
+   38  sudo bbb-record --watch
+   39  exit
+   40  bbb-conf --check
+   41  sudo apt-get install bbb-demo
+   42  sudo bbb-conf --restart
+   43  docker-compose down
+   44  cd ~/greenlight/
+   45  docker-compose down
+   46  docker-compose up -d
+   47  sudo bbb-conf --restart
+   48  sudo bbb-conf --check
+   49  sudo apt-get remove bbb-demo
+   50  docker-compose down
+   51  docker-compose up -d
+   52  sudo bbb-conf --restart
+   53  sudo bbb-conf --check
+   54  sudo bbb-conf --status
+   55  exit
+   56  sudo vi /usr/local/bigbluebutton/core/scripts/presentation.yml 
+   57  exit
+   58  bbb-conf --check
+   59  exit
+   60  sudo bbb-conf --restart
+   61  sudo bbb-conf --check
+   62  sudo bbb-conf --status
+   63  exit
+   64  bbb-record --watch
+   65  exit
+   66  bbb-record --watch
+   67  exit
+   68  bbb-conf --check
+   69  bbb-record --watch
+   70  cd /var/bigbluebutton/recording/status/recorded/
+   71  ls
+   72  bbb-record --watch
+   73  bbb-record --deleteall
+   74  bbb-record --watch
+   75  ls
+   76  cd ..
+   77  ls
+   78  cd processed/
+   79  ls
+   80  cd pub
+   81  ccd ..
+   82  cd ..
+   83  cd published/
+   84  ls
+   85  cd ..
+   86  ls
+   87  cd sanity/
+   88  ls
+   89  cd ..
+   90  exit
+   91  shutdown -h now
+   92  exit
+   93  sudo bbb-conf --check
+   94  exit
+   95  bbb-record --watch
+   96  bbb-record --deleteall
+   97  bbb-record --watch
+   98  exit
+   99  timedatectl set-timezone Asia/Kolkata
+  100  timedatectl
+  101  exit
+  102  bbb-record --watch
+  103  vi /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml
+  104  bbb-conf --restart
+  105  exit
+  106  bbb-record --watch
+  107  bbb-record --deleteall
+  108  bbb-record --watch
+  109  exit
+  110  bbb-record --watch
+  111  exit
+  112  bbb-record --watch
+  113  bbb-record --deleteall
+  114  bbb-record --watch
+  115  exit
+  116  bbb-record --watch
+  117  exit
+  118  bbb-record --watch
+  119  exit
+  120  bbb-record --watch
+  121  exit
+  122  bbb-record --watch
+  123  exit
+  124  bbb-record --list
+  125  exit
+  126  bbb-record --watch
+  127  bbb-record --list
+  128  free -h
+  129  exit
+  130  vi /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml
+  131  bbb-conf --restart
+  132  exit
+  133  git clone https://github.com/createwebinar/bbb-download.git
+  134  cd bbb-download/
+  135  chmod u+x install.sh 
+  136  sudo ./install.sh 
+  137  cd /opt/ffmpeg/
+  138  ls
+  139  cd ~/
+  140  bbb-record --watch
+  141  cd /var/bigbluebutton/recording/
+  142  ls
+  143  cd publish/
+  144  ls
+  145  cd presentation/
+  146  ls
+  147  cd ..
+  148  ls
+  149  cd published/
+  150  ls
+  151  cd presentation/
+  152  ls
+  153  bbb-record --watch
+  154  cd aaa7f3e64c660fa71186217529042077efcd8329-1597254478244
+  155  ls
+  156  cd video/
+  157  ls
+  158  cd ..
+  159  ls
+  160  cd download/
+  161  ls
+  162  cd ..
+  163  cd presentation/
+  164  ls
+  165  cd ..
+  166  ls
+  167  cd temp/
+  168  ls
+  169  cd presentation/
+  170  ls
+  171  cd ..
+  172  ls
+  173  cd ..
+  174  ls
+  175  cd ~/
+  176  cd /var/www/bigbluebutton-default/download/presentation
+  177  ls
+  178  cd aaa7f3e64c660fa71186217529042077efcd8329-1597254478244
+  179  ls
+  180  cd download/
+  181  ls
+  182  cd ..
+  183  cd video/
+  184  ls
+  185  cd ..
+  186  ls
+  187  cd presentation/
+  188  ls
+  189  cd f92bb329bc4772d2ba776c6b834c9bc8d5310d7c-1597254511300
+  190  ls
+  191  cd ..
+  192  ffmpeg
+  193  man ffmpeg
+  194  ffmpeg debug
+  195  q
+  196  ls
+  197  cd ..
+  198  ls
+  199  cd cd download/
+  200  cd download/
+  201  ls
+  202  cd vi
+  203  cd video
+  204  cd ..
+  205  cd video/
+  206  ls
+  207  cd ..
+  208  ls
+  209  ls -l
+  210  cd ~
+  211  bbb-record --rebuild aaa7f3e64c660fa71186217529042077efcd8329-1597254478244
+  212  bbb-conf --status
+  213  bbb-conf --restart
+  214  bbb-conf --setip meetings-demo.edumarshal.com
+  215  bbb-conf --check
+  216  exit
+  217  sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+  218  sudo iptables -A INPUT -p tcp --dport 1935 -j ACCEPT
+  219  sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+  220  sudo iptables -A INPUT -p tcp --dport 7443 -j ACCEPT
+  221  sudo iptables -A INPUT -p udp --dport 16384:32768 -j ACCEPT
+  222  bbb-conf --clean
+  223  exit
+  224  cd /var/www/bigbluebutton-default/download/
+  225  ls
+  226  cd presentation
+  227  ls
+  228  cd aaa7f3e64c660fa71186217529042077efcd8329-1597262907910
+  229  ls
+  230  ls -l
+  231  cd ~/
+  232  ls
+  233  rm -R bbb-export/
+  234  ls
+  235  cd /var/www/bigbluebutton-default/download/
+  236  ls
+  237  cd presentation
+  238  cd aaa7f3e64c660fa71186217529042077efcd8329-1597262907910
+  239  ls
+  240  ls -l
+  241  bbb-conf --secret
+  242  bbb-record --watch
+  243  exit
+  244  sudo apt-get install bbb-demo
+  245  bbb-conf --restart
+  246  bbb-conf --status
+  247  sudo apt install s3fs
+  248  whereis s3fs
+  249  touch /etc/eos_creds
+  250  echo "QHPSFPOKIHVG06DC2TQP:Y9PBJIG4QZKQOATD3FONP4VUY87ZZKRQ6E2ZV1XO" > /etc/eos_creds
+  251  chmod 600 /etc/eos_creds
+  252  mkdir /eos
+  253  cd /tmp/
+  254  cd ~/
+  255  s3fs bbb-demo-recordings -o use_cache=/tmp -o allow_other -o multireq_max=5 -o url=https://objectstore.e2enetworks.net /eos
+  256  s3fs bbb-demo-recordings -o use_cache=/tmp -o allow_other -o multireq_max=5 -o url=https://objectstore.e2enetworks.net -o passwd_file=/etc/eos_creds -o use_path_request_style /eos
+  257  cd /eos
+  258  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds,use_path_request_style,url=https://objectstore.e2enetworks.net
+  259  cwd
+  260  pwd
+  261  umount /eos
+  262  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds,use_path_request_style,url=https://objectstore.e2enetworks.net
+  263  cd /eos
+  264  chmod 600 /etc/eos_creds
+  265  exit
+  266  sudo apt install s3fs
+  267  cat /etc/eos_creds
+  268  chmod 600 /etc/eos_creds
+  269  cd /eos
+  270  sudo umount /eos
+  271  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds,use_path_request_style,url=https://objectstore.e2enetworks.net
+  272  cd /eos
+  273  sudo umount /eos
+  274  s3fs bbb /eos -o passwd_file=/etc/eos_creds,use_path_request_style,url=https://objectstore.e2enetworks.net
+  275  cd /eos
+  276  ls
+  277  touch a
+  278  rm a
+  279  cd ..
+  280  sudo umount /eos
+  281  exit
+  282  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds,use_path_request_style,url=https://objectstore.e2enetworks.net
+  283  cd /eos
+  284  touch a
+  285  ls
+  286  useradd a 
+  287  passwd a 
+  288  su a
+  289  ls
+  290  sudo umount /eos
+  291  s3fs bbb /eos -o passwd_file=/etc/eos_creds,use_cache=/tmp,allow_other,use_path_request_style,url=https://objectstore.e2enetworks.net
+  292  cd /eos
+  293  ls
+  294  umount /eos
+  295  s3fs bbb /eos -o passwd_file=/etc/eos_creds,allow_other,use_path_request_style,url=https://objectstore.e2enetworks.net
+  296  ls /eos
+  297  umount /eos
+  298  s3fs bbb /eos -o passwd_file=/etc/eos_creds,noperm,use_path_request_style,url=https://objectstore.e2enetworks.net
+  299  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o allow_others -o url=https://objectstore.e2enetworks.net
+  300  apt-get update
+  301  sudo apt-get remove s3fs
+  302  git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+  303  sudo apt-get install automake autotools-dev fuse g++ git libcurl4-gnutls-dev libfuse-dev libssl-dev libxml2-dev make pkg-config
+  304  sudo usermod -a -G root bigbluebutton
+  305  sudo apt-get install automake autotools-dev fuse g++ git libcurl4-gnutls-dev libfuse-dev libssl-dev libxml2-dev make pkg-config
+  306  cd s3fs-fuse
+  307  ./autogen.sh
+  308  ./configure --prefix=/usr --with-openssl
+  309  make
+  310  ./configure --prefix=/usr --with-openssl
+  311  make
+  312  sudo make install
+  313  which s3fs
+  314  nano /etc/passwd
+  315  su bigbluebutton 
+  316  chmod 777 /eos
+  317  su bigbluebutton 
+  318  https://docs.e2enetworks.com/objectstore/s3fuse.html
+  319  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  320  cd /eos
+  321  ls
+  322  su a
+  323  su bigbluebutton
+  324  su a
+  325  whoami
+  326  ls
+  327  umount /eos
+  328  cd ..
+  329  ls /eos
+  330  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o allow_other -o url=https://objectstore.e2enetworks.net
+  331  ls
+  332  cd /eos
+  333  ls
+  334  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o allow_others -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  335  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  336  cd /eos
+  337  pwd
+  338  su a
+  339  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o allow_others -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  340  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  341  ls
+  342  cd ..
+  343  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  344  umount /eos
+  345  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  346  sudo apt-get install s3fs
+  347  s3fs bbb /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  348  cd /eos
+  349  ls
+  350  umount /eos
+  351  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds,use_path_request_style,url=https://objectstore.e2enetworks.net
+  352  cd /eos
+  353  touch a
+  354  ls
+  355  rm a
+  356  su a
+  357  exit
+  358  id bigbluebutton 
+  359  umount /eos
+  360  cd /eos
+  361  ls
+  362  cd ..
+  363  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o uid=998 -o mp_umask=002 -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  364  cd eos
+  365  ls
+  366  touch a
+  367  ls
+  368  su bigbluebutton
+  369  ls
+  370  cd ..
+  371  ls
+  372  chmod 777 eos
+  373  chmod 777 /eos
+  374  umount /eos
+  375  usermod -a -G root bigbluebutton 
+  376  groups
+  377  su bigbluebutton 
+  378  sudo nano /etc/fuse.conf
+  379  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  380  cd /eos
+  381  ls
+  382  su bigbluebutton 
+  383  cd ..
+  384  umount /eos
+  385  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o -o allow_others use_path_request_style -o url=https://objectstore.e2enetworks.net
+  386  umount /eos
+  387  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o -o allow_others -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  388  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o -o uid=998 -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  389  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o uid=998 -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  390  umout /eos
+  391  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o uid=998 -o allow_others -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  392  cd /eos
+  393  ls
+  394  cd ..
+  395  umout /eos
+  396  umount /eos
+  397  ls /eos
+  398  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o uid=998 -o allow_others -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  399  ls /eos
+  400  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o uid=998 -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  401  ls /eos
+  402  su bigbluebutton 
+  403  exit
+  404  clear
+  405  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o  -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  406  cd /eos
+  407  ls
+  408  rm a
+  409  cd ..
+  410  clear
+  411  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o  -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  412  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o url=https://objectstore.e2enetworks.net
+  413  cd /eos
+  414  s
+  415  ls
+  416  touch a
+  417  ls
+  418  userdel a
+  419  useradd a
+  420  su a
+  421  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o allow_others -o url=https://objectstore.e2enetworks.net
+  422  ls
+  423  cd ..
+  424  umount /eos
+  425  ls /eos
+  426  cd eos
+  427  ls
+  428  rm a
+  429  cd ..
+  430  umount /eos
+  431  ls
+  432  cd eos
+  433  ls
+  434  cd ..
+  435  s3fs bbb-demo-recordings /eos -o passwd_file=/etc/eos_creds -o use_path_request_style -o allow_others -o url=https://objectstore.e2enetworks.net
+  436  ls
+  437  sudo apt-get remove s3fs
+  438  ls
+  439  cd ~
+  440  ;s
+  441  ls
+  442  cd s3fs-fuse
+  443  ./autogen.sh
+  444  ./configure --prefix=/usr --with-openssl
+  445  make
+  446  sudo make install
+  447  ls
+  448  which s3fs
+  449  touch /etc/passwd-s3fs
+  450  nano /etc/passwd-s3fs
+  451  sudo chmod 640 /etc/passwd-s3fs
+  452  mkdir /mount
+  453  pwd
+  454  cd ~
+  455  pwd
+  456  nano .passwd-s3fs
+  457  chmod 600 ~/.passwd-s3fs 
+  458  ls /mount
+  459  nano /etc/fuse.conf 
+  460  s3fs scalteliteecordings -o use_cache=/tmp -o allow_other -o multireq_max=5 /mount
+  461  cd /mount
+  462  ls
+  463  cd ~
+  464  pwd
+  465  mkdir scalteliteecordings
+  466  s3fs scalteliteecordings -o use_cache=/tmp -o allow_other -o uid=0 -o mp_umask=002 -o multireq_max=5 /root/scalteliteecordings
+  467  ls
+  468  cd scalteliteecordings/
+  469  ls
+  470  exit
+  471  nano /etc/passwd-s3fs
+  472  sudo chmod 640 /etc/passwd-s3fs
+  473  ls -a
+  474  nano .passwd-s3fs 
+  475  s3fs scalteliteecordings -o use_cache=/tmp -o allow_other -o uid=0  -o multireq_max=5 /home/root/scalteliteecordings/
+  476  ls
+  477  rm -rf scalteliteecordings/
+  478  s3fs scalteliteecordings -o use_cache=/tmp -o allow_other -o uid=0  -o multireq_max=5 /root/scalteliteecordings/
+  479  mkdir scalteliteecordings
+  480  s3fs scalteliteecordings -o use_cache=/tmp -o allow_other -o uid=0  -o multireq_max=5 /root/scalteliteecordings/
+  481  cd scalteliteecordings/
+  482  ls
+  483  cd ..
+  484  clear
+  485  ls
+  486  cd scalteliteecordings/
+  487  ls
+  488  cd bigbluebutton/
+  489  ls
+  490  cd ..
+  491  cd /
+  492  cd root
+  493  ls
+  494  cd scalteliteecordings/
+  495  ls
+  496  cd bigbluebutton/
+  497  ls
+  498  cd ..
+  499  touch a
+  500  ls
+  501  cd bigbluebutton/
+  502  ls
+  503  cd ..
+  504  touch a
+  505  ls
+  506  rm a
+  507  exit
+  508  bbb-record --watch
+  509  bbb-conf
+  510  exit
+  511  bbb-record --watch
+  512  cd ~/
+  513  ls
+  514  whereis bbb-record
+  515  cd ~/
+  516  ls
+  517  pwd
+  518  cd /root/
+  519  ls
+  520  bbb-record --watch
+  521  umount /eos
+  522  cd /mnt/
+  523  ls
+  524  cd /var/bigbluebutton/published/
+  525  ls
+  526  bbb-record --watch
+  527  cd /usr/bin/
+  528  ls
+  529  d /home/ubuntu/
+  530  cd ..
+  531  pwd
+  532  cd /root/
+  533  ls
+  534  pwd
+  535  cd scalteliteecordings/
+  536  ls
+  537  cd ..
+  538  cd s3fs-fuse/
+  539  ls
+  540  bbb-conf --restart
+  541  whereis bbb-conf
+  542  cd ..
+  543  cd /home/ubuntu/
+  544  bbb-record --watch
+  545  ls
+  546  vi p 
+  547  pwd
+  548  cd /root/
+  549  ls
+  550  whereis bbb-record
+  551  exit
+  552  bbb-conf --status
+  553  ls
+  554  cd eos
+  555  ls
+  556  cd ..
+  557  exit
+  558  bbb-record --watch
+  559  cd s3fs-fuse/
+  560  ls
+  561  cd ..
+  562  sudo apt-get remove s3fs
+  563  sudo apt autoremove
+  564  bbb-record watch
+  565  restart
+  566  shutdown -h now
+  567  bbb-record watch
+  568  rm /eos/
+  569  rm -R /eos/
+  570  umount /eos
+  571  bbb-conf --restart
+  572  exit
+  573  cat .profile
+  574  clear
+  575  cat .bash_profile
+  576  ls -a
+  577  history 
+  578  history > history.txt

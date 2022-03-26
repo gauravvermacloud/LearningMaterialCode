@@ -1,0 +1,469 @@
+*******************************TBD
+		--- adding bbb user to the group
+		--- setting up greenlight key and url etc
+
+Step 4 of Samba already done
+
+1. Make machine 1 using bbb-install.sh 192.168.0.111
+	- make a normal linux 16 machine
+	- set ip to 192.168.0.111 
+		- by making this entry in /etc/network/interfaces
+			auto enp0s3
+			iface enp0s3 inet static
+			address 192.168.0.111
+			netmask 255.255.255.0
+			gateway 192.168.0.1
+			dns-nameservers 8.8.8.8
+
+	- add smb shared to this
+		- update /etc/passwd to remove the false in the name of user
+		- mkdir /home/ubuntu/smbshare
+		- sudo apt-get install cifs-utils
+		- ensure the mount works by running this command
+			sudo mount -t cifs -o username=ubuntu,password=Password1234$,noperm //192.168.0.100/FileShare /home/ubuntu/smbshare
+		- ensure that all users can write to it
+			- useradd a
+			- cd /home/ubuntu/smbshare
+			- touch x
+			- rm x
+
+		
+	-- need to figure out fstab entries for this
+
+		- install bbb
+			- sudo su root
+			- wget -qO- https://ubuntu.bigbluebutton.org/bbb-install.sh | bash -s -- -w -v xenial-22 -a -w -g 			
+		
+			- setup self signed cert 
+				- sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./nginx-selfsigned.key -out ./nginx-selfsigned.crt
+
+
+			https://docs.bigbluebutton.org/2.2/install.html#configure-ssl-on-your-bigbluebutton-server
+
+
+
+
+
+		- bbb-conf --stop
+
+
+		- change bbb dir to point to mount
+			mv /var/bigbluebutton /var/bigbluebutton_old
+			ln -s /home/ubuntu/bbbdoc/bigbluebutton /var
+
+		- mv bigbluebutton bigbluebutton_old
+		- ln -s /home/ubuntu/smbshare/bigbluebutton /var
+		- bbb-conf --start
+		
+		- run a meeting and record it
+			gaurav_bbb1 / gaurav.verma.bbb1@gmail.com / Password1234$
+
+		*******************************TBD
+		usermod -a -G scalelite-spool bigbluebutton
+
+
+
+2. Make machine 2 using bbb-install.sh 192.168.0.112
+	- make a normal linux 16 machine
+	- set ip to 192.168.0.112 
+		- by making this entry in /etc/network/interfaces
+			auto enp0s3
+			iface enp0s3 inet static
+			address 192.168.0.112
+			netmask 255.255.255.0
+			gateway 192.168.0.1
+			dns-nameservers 8.8.8.8
+	- add smb shared to this
+		- mkdir /home/ubuntu/smbshare
+		- sudo apt-get install cifs-utils
+		- ensure the mount works by running this command
+			sudo mount -t cifs -o username=ubuntu,password=Password1234$,noperm //192.168.0.100/FileShare /home/ubuntu/smbshare
+		- ensure that all users can write to it
+			- useradd a
+			- cd /home/ubuntu/smbshare
+			- touch x
+			- rm x
+		
+		-- need to figure out fstab entries for this
+
+		- install bbb
+			- sudo su root 
+			- wget -qO- https://ubuntu.bigbluebutton.org/bbb-install.sh | bash -s -- -v xenial-22 -s 192.168.0.112   -a -w -g 
+
+
+
+		
+		- setup ssl
+			sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./nginx-selfsigned.key -out ./nginx-selfsigned.crt
+			https://docs.bigbluebutton.org/2.2/install.html#configure-ssl-on-your-bigbluebutton-server
+
+		- change bbb dir to point to mount
+			mv /var/bigbluebutton /var/bigbluebutton_old
+			ln -s /home/ubuntu/bbbdoc/bigbluebutton /var
+
+		- mv bigbluebutton bigbluebutton_old
+		- ln -s /home/ubuntu/smbshare/bigbluebutton /var
+
+		- Register gaurav_bbb1  / gaurav.verma.bbb2@gmail.com / Password1234$
+
+		*******************************TBD
+		usermod -a -G scalelite-spool bigbluebutton
+
+
+3. Make a machine for scalelite - 		   192.168.1.110
+	- this will have postgres, docker and redis on it 
+	- how do we give redis a password?
+	- Make a linux machine
+	- set static ip
+		- by making this entry in /etc/network/interfaces
+			auto enp0s3
+			iface enp0s3 inet static
+			address 192.168.0.110
+			netmask 255.255.255.0
+			gateway 192.168.0.1
+			dns-nameservers 8.8.8.8
+	- add smb shared to this
+		- mkdir /home/ubuntu/smbshare
+		- sudo apt-get install cifs-utils
+		- ensure the mount works by running this command
+			sudo mount -t cifs -o username=ubuntu,password=Password1234$,noperm //192.168.0.100/FileShare /home/ubuntu/smbshare
+		- ensure that all users can write to it
+			- useradd a
+			- cd /home/ubuntu/smbshare
+			- touch x
+			- rm x
+
+	-install postgres (doing this on 192.168.0.113)
+		- install postgres --> sudo apt-get install postgresql postgresql-contrib
+		- change password of user postgres to Password1234$
+		- open sudo nano /etc/postgresql/9.5/main/pg_hba.conf 
+			- add md5 for postgres
+			-fix as here https://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge
+		- loginto psql and issue \password and change password to Password1234$
+		- enable remote connection
+			- edit /etc/postgresql/9.5/main/postgresql.conf 
+			- change listen_addresses to '*'
+			- Ref https://support.plesk.com/hc/en-us/articles/115003321434-How-to-enable-remote-access-to-PostgreSQL-server-on-a-Plesk-server-
+
+			- edif sudo nano /etc/postgresql/9.5/main/pg_hba.conf 
+				- in the previous line where md5 was added also add 0.0.0.0/0
+
+				It should be
+				host   all             postgres        0.0.0.0/0               md5
+
+			- sudo service postgresql restart
+
+		- log into postgres as
+			psql -h 192.168.0.113 -U postgres -W
+		- log in from a remote machin too
+
+
+	- install redis (192.168.0.114)
+		- sudo apt install redis-server
+			- redis-cli
+				ping
+		- enable remote access
+			- edit /etc/redis/redis.conf
+				set bind to 0.0.0.0
+		- set redis password	
+			enable requirepass to Password1234$
+		- sudo service redis restart
+
+		- redis-cli -h 192.168.0.114
+		AUTH Password1234$
+
+	- Install docker
+		sudo apt-get update
+
+		use xenial for ubuntu 16 not bionic
+		also found by running lsb_release -cs
+
+		https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+
+		https://docs.docker.com/engine/install/ubuntu/
+
+		https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
+
+		- reboot
+		- docker run hello-world
+
+
+
+		sudo useradd -m scalelite-spool
+		sudo passwd scalelite-spool	<<<< Password1234$
+		 sudo usermod -s /bin/bash scalelite-spool
+
+
+# Create the spool directory for recording transfer from BigBlueButton
+mkdir -p /mnt/scalelite-recordings/var/bigbluebutton/spool
+chown 1001:1001 /mnt/scalelite-recordings/var/bigbluebutton/spool
+chmod 0775 /mnt/scalelite-recordings/var/bigbluebutton/spool
+
+# Create the temporary (working) directory for recording import
+mkdir -p /mnt/scalelite-recordings/var/bigbluebutton/recording/scalelite
+chown 1001:1001 /mnt/scalelite-recordings/var/bigbluebutton/recording/scalelite
+chmod 0775 /mnt/scalelite-recordings/var/bigbluebutton/recording/scalelite
+
+# Create the directory for published recordings
+mkdir -p /mnt/scalelite-recordings/var/bigbluebutton/published
+chown 1001:1001 /mnt/scalelite-recordings/var/bigbluebutton/published
+chmod 0775 /mnt/scalelite-recordings/var/bigbluebutton/published
+
+# Create the directory for unpublished recordings
+mkdir -p /mnt/scalelite-recordings/var/bigbluebutton/unpublished
+chown 1001:1001 /mnt/scalelite-recordings/var/bigbluebutton/unpublished
+chmod 0775 /mnt/scalelite-recordings/var/bigbluebutton/unpublished
+
+
+
+docker network create scalelite
+
+
+		nano /etc/default/scalelite
+			
+URL_HOST=192.168.0.110
+SECRET_KEY_BASE=851fbf212cf00529b142c32f6483a1d10643bbd077f6e9111fb12e90a2d33101b8927c591d33204e10b9d2639ae678d41dfc1006c0dee7d2623abb4f3104a971
+LOADBALANCER_SECRET=e78fdde529bd6ed8c374cc04dad78843fcf2a724ce5fc39eaee96ea69614d3b5
+DATABASE_URL=postgresql://postgres:Password1234$@192.168.0.113:5432
+REDIS_URL=redis://:Password1234$@192.168.0.114:6379
+SCALELITE_TAG=v1
+SCALELITE_RECORDING_DIR=/mnt/scalelite-recordings/var/bigbluebutton
+NGINX_SSL=false
+
+
+
+		nano /etc/systemd/system/scalelite.target
+			[Unit]
+			Description=Scalelite
+			[Install]
+			WantedBy=multi-user.target
+
+		systemctl enable scalelite.target
+
+		nano /etc/systemd/system/scalelite-api.service
+			[Unit]
+			Description=Scalelite API
+			After=network-online.target
+			Wants=network-online.target
+			Before=scalelite.target
+			PartOf=scalelite.target
+			[Service]
+			EnvironmentFile=/etc/default/scalelite
+			ExecStartPre=-/usr/bin/docker kill scalelite-api
+			ExecStartPre=-/usr/bin/docker rm scalelite-api
+			ExecStartPre=/usr/bin/docker pull blindsidenetwks/scalelite:${SCALELITE_TAG}-api
+			ExecStart=/usr/bin/docker run --name scalelite-api --env-file /etc/default/scalelite --network scalelite --mount type=bind,source=${SCALELITE_RECORDING_DIR},target=/var/bigbluebutton blindsidenetwks/scalelite:${SCALELITE_TAG}-api
+			[Install]
+			WantedBy=scalelite.target
+
+
+		systemctl enable scalelite-api.service
+
+		nano /etc/systemd/system/scalelite-nginx.service
+			[Unit]
+			Description=Scalelite Nginx
+			After=network-online.target
+			Wants=network-online.target
+			Before=scalelite.target
+			PartOf=scalelite.target
+			After=scalelite-api.service
+			Requires=scalelite-api.service
+			After=remote-fs.target
+			[Service]
+			EnvironmentFile=/etc/default/scalelite
+			ExecStartPre=-/usr/bin/docker kill scalelite-nginx
+			ExecStartPre=-/usr/bin/docker rm scalelite-nginx
+			ExecStartPre=/usr/bin/docker pull blindsidenetwks/scalelite:${SCALELITE_TAG}-nginx
+			ExecStart=/usr/bin/docker run --name scalelite-nginx --env-file /etc/default/scalelite --network scalelite --publish 80:80 --publish 443:443 --mount type=bind,source=${SCALELITE_RECORDING_DIR}/published,target=/var/bigbluebutton/published,readonly $SCALELITE_NGINX_EXTRA_OPTS blindsidenetwks/scalelite:${SCALELITE_TAG}-nginx
+			[Install]
+			WantedBy=scalelite.target
+
+		systemctl enable scalelite-nginx.service
+
+		systemctl restart scalelite.target
+		systemctl status scalelite-api.service scalelite-nginx.service
+
+		this needs to reboot
+
+	
+???WHAT IS BG DOING BEFORE THIS POINT
+???https://github.com/blindsidenetworks/scalelite/blob/master/docker-README.md#initialize-the-scalelite-api-database
+
+	docker exec -it scalelite-api bin/rake db:setup
+
+	systemctl restart scalelite.target
+	systemctl status scalelite-api.service scalelite-nginx.service scalelite.target scalelite-poller.service
+
+
+Edit /etc/systemd/system/scalelite-poller.service
+		[Unit]
+		Description=Scalelite Meeting Status Poller
+		After=network-online.target
+		Wants=network-online.target
+		Before=scalelite.target
+		PartOf=scalelite.target
+		After=scalelite-api.service
+		[Service]
+		EnvironmentFile=/etc/default/scalelite
+		ExecStartPre=-/usr/bin/docker kill scalelite-poller
+		ExecStartPre=-/usr/bin/docker rm scalelite-poller
+		ExecStartPre=/usr/bin/docker pull blindsidenetwks/scalelite:${SCALELITE_TAG}-poller
+		ExecStart=/usr/bin/docker run --name scalelite-poller --env-file /etc/default/scalelite --network scalelite blindsidenetwks/scalelite:${SCALELITE_TAG}-poller
+		[Install]
+		WantedBy=scalelite.target
+
+
+systemctl enable scalelite-poller.service
+
+systemctl restart scalelite.target
+
+check ->>> systemctl status scalelite-poller.service
+
+systemctl status scalelite-api.service scalelite-nginx.service
+
+
+Setup recording service
+
+**** HIGH PROBABILTY I SCREWED THIS STEP
+nano /etc/systemd/system/scalelite-recording-importer.service
+[Unit]
+Description=Scalelite Recording Importer
+After=network-online.target
+Wants=network-online.target
+Before=scalelite.target
+PartOf=scalelite.target
+After=scalelite-api.service
+After=remote-fs.target
+[Service]
+EnvironmentFile=/etc/default/scalelite
+ExecStartPre=-/usr/bin/docker kill scalelite-recording-importer
+ExecStartPre=-/usr/bin/docker rm scalelite-recording-importer
+ExecStartPre=/usr/bin/docker pull blindsidenetwks/scalelite:${SCALELITE_TAG}-recording-importer
+ExecStart=/usr/bin/docker run --name scalelite-recording-importer --env-file /etc/default/scalelite --network scalelite --mount type=bind,source=${SCALELITE_RECORDING_DIR},target=/var/bigbluebutton blindsidenetwks/scalelite:${SCALELITE_TAG}-recording-importer
+[Install]
+WantedBy=scalelite.target
+
+systemctl enable scalelite-recording-importer.service
+
+systemctl restart scalelite-recording-importer.service
+systemctl status systemctl status scalelite-api.service scalelite-nginx.service scalelite.target scalelite-poller.service scalelite-recording-importer.service
+
+
+https://github.com/blindsidenetworks/scalelite/blob/master/docker-README.md#initialize-the-scalelite-api-database
+
+
+
+
+
+
+
+
+5. Update Greenlite to use the url of scalelite
+	- login into 192.168.0.111
+	- su root
+	- cd ~
+	- cd greenlight
+	- ls -a
+	- hidden file is .env
+	- backup .env file
+	- update url and secret to load balancer secret
+		- the url should end in /api
+
+		docker-compose down
+docker-compose up -d
+
+6. Add one server to the scalelite
+	loginto docker 	--> 
+		docker exec -it scalelite-api sh
+	to find configured servers use ./bin/rake servers
+
+	add server
+		- run on the server ::: bbb-conf --secret
+		./bin/rake servers:add[url,secret,loadMultiplier]
+		url =  https://192.168.0.112/bigbluebutton/api 			<<<note api in end
+		secret = Irnh960ktgoAtirvhWESg0RqXeeSoi6s3O7WZU5xRc
+		load mult = 1
+
+		./bin/rake servers:add[http://192.168.0.112/bigbluebutton/api,Irnh960ktgoAtirvhWESg0RqXeeSoi6s3O7WZU5xRc]
+		./bin/rake servers:add[http://192.168.0.111/bigbluebutton/api,YVSOtMq6YbhSCVskwcJszd8yQWiwh5CSk8vlVNpEEM]
+
+		bring online ./bin/rake poll:all
+
+
+To check status
+
+	./bin/rake status
+
+
+On SL Server
+		- update /etc/passwd to remove the false in the name of user
+		- mkdir /home/ubuntu/smbshare
+		- sudo apt-get install cifs-utils
+		- ensure the mount works by running this command
+			sudo mount -t cifs -o username=ubuntu,password=Password1234$,noperm //192.168.0.100/FileShare /home/ubuntu/smbshare
+		- ensure that all users can write to it
+			- useradd a
+			- cd /home/ubuntu/smbshare
+			- touch x
+			- rm x
+
+		mkdir /home/ubuntu/smbshare/scalelite-recordings
+
+		 ln -s /home/ubuntu/smbshare/scalelite-recordings /mnt
+
+		 chown -R scalelite-spool:scalelite-spool ./scalelite-recordings
+
+
+On BBB Server
+	groupadd -g 2000 scalelite-spool
+	usermod -a -G scalelite-spool bigbluebutton
+
+	ln -s /home/ubuntu/smbshare/scalelite-recordings /mnt
+
+
+As bbb user
+on this path /usr/local/bigbluebutton/core/scripts/post_publish/scalelite_post_publish.rb
+install https://raw.githubusercontent.com/blindsidenetworks/scalelite/master/bigbluebutton/scalelite_post_publish.rb
+
+
+on this path /usr/local/bigbluebutton/core/scripts/scalelite.yml
+install https://raw.githubusercontent.com/blindsidenetworks/scalelite/master/bigbluebutton/scalelite.yml
+
+modify scalelite.yml
+
+spool_dir: /mnt/scalelite-recordings/var/bigbluebutton/spool
+
+ensure this path /var/bigbluebutton/recording/scalelite-recordings exists and bbb can write to it
+
+ sudo ln -s /home/ubuntu/smbshare/scalelite-recordings/var/bigbluebutton/ /var
+
+ chmod scalelite-spool:scalelite-spool /var/bigbluebutton
+
+
+ The SL Services need to be restarted
+ They need to be restarted after reboot and mounting
+======================================================================================
+
+7. Make a smb machine - 192.168.1.100 <<not documented in detail as we wont be doing it>>
+https://www.liquidweb.com/kb/how-to-install-and-configure-samba-on-ubuntu-18/
+Our folder shared is  /opt/share
+user name = ubuntu
+password = Password1234$
+
+Mounting machines
+apt-get install cifs-utils
+
+
+https://marzorati.co/how-to-mount-cifs-share-permanently-on-ubuntu/
+
+Command to mount = sudo mount -t cifs -o username=ubuntu,password=Password1234$,gid=0,uid=0,file_mode=0777,dir_mode=0777 //192.168.0.100/FileShare /home/gaurav/smbmount	
+
+entry  in /etc/fstab =  //192.168.0.100/FileShare /home/ubuntu/smbmount username=ubuntu,password=Password1234$,gid=0,uid=0,file_mode=0777,dir_mode=0777 0 0
+
+
+
+<your other options>,file_mode=0775,dir_mode=0775 or 0777
+
+
+8. Make a seperate GL Server
+	https://docs.bigbluebutton.org/greenlight/gl-install.html
