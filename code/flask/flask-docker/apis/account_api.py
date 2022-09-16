@@ -3,11 +3,14 @@ import json
 from lib2to3.pytree import Base
 from flask import Blueprint, jsonify
 from apis.exceptions import MyBaseException, MyDerivedException
+from my_logger import wrap
+
 
 account_api = Blueprint('account_api', __name__)
 
 
 @account_api.route("/account")
+@wrap()
 def account_list():
     return jsonify([1, 2, 3, 4])
 

@@ -4,6 +4,8 @@ from apscheduler.executors.pool import ThreadPoolExecutor
 from datetime import datetime
 import threading
 import time
+from my_logger import wrap
+import config_reader
 
 # https://apscheduler.readthedocs.io/en/3.x/userguide.html
 scheduler = BackgroundScheduler()
@@ -21,6 +23,7 @@ scheduler = BackgroundScheduler(
     executors=executors, job_defaults=job_defaults)
 
 
+@wrap()
 def myfunc():
     time.sleep(4)
     print("Every 1 sec " + str(datetime.now())+str(threading.get_ident()))
@@ -29,4 +32,5 @@ def myfunc():
 scheduler.add_job(myfunc, 'interval', seconds=1,
                   id='my_job_id', max_instances=1)
 
-scheduler.start()
+if(config_reader.is_scheduler_enabled):
+    scheduler.start()

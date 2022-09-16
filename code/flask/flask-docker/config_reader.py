@@ -15,3 +15,8 @@ if (config["Default"]["Debug"] == "False"):
 server = config["Default"]["Server"]
 
 cors = config["Default"]["cors"]
+
+is_scheduler_enabled = True
+
+if (config["Default"]["is_scheduler_enabled"] == "False"):
+    is_scheduler_enabled = False

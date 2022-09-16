@@ -11,24 +11,25 @@ from waitress import serve
 import Scheduler
 import time
 from flask_cors import CORS
+from my_logger import wrap
 
 app = Flask(__name__)
 app.register_blueprint(account_api)
 cors = CORS(app, resources={r"/*": {"origins": config_reader.cors}})
 
 
-@ app.route('/api/test', methods=["GET"])
+@app.route('/api/test', methods=["GET"])
+@wrap()
 def method_name():
     print("Before Return -1")
 
     current_thrd = threading.currentThread()
     print(current_thrd.ident)
     print(current_thrd.my_prop)
-
     return jsonify({"key": "1Value1"})
 
 
-@ app.before_request
+@app.before_request
 def before_request():
     current_thrd = threading.currentThread()
     print(current_thrd.ident)
