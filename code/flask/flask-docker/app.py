@@ -9,6 +9,7 @@ from apis.exceptions import MyBaseException, MyDerivedException
 import config_reader
 from waitress import serve
 
+
 app = Flask(__name__)
 app.register_blueprint(account_api)
 
