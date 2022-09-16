@@ -8,13 +8,16 @@ from flask import request
 from apis.exceptions import MyBaseException, MyDerivedException
 import config_reader
 from waitress import serve
-
+import Scheduler
+import time
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.register_blueprint(account_api)
+cors = CORS(app, resources={r"/*": {"origins": config_reader.cors}})
 
 
-@app.route('/api/test', methods=["GET"])
+@ app.route('/api/test', methods=["GET"])
 def method_name():
     print("Before Return -1")
 
@@ -25,7 +28,7 @@ def method_name():
     return jsonify({"key": "1Value1"})
 
 
-@app.before_request
+@ app.before_request
 def before_request():
     current_thrd = threading.currentThread()
     print(current_thrd.ident)
@@ -33,12 +36,12 @@ def before_request():
     print(current_thrd.my_prop)
 
 
-@app.errorhandler(MyBaseException.MyBaseException)
+@ app.errorhandler(MyBaseException.MyBaseException)
 def handle_not_found(e):
     return jsonify({"exception": "NotFound"}), 404
 
 
-@app.errorhandler(MyDerivedException.DerivedException)
+@ app.errorhandler(MyDerivedException.DerivedException)
 def handle_bad_request(e):
     return jsonify({"exception": "Bad Request"}), 400
 

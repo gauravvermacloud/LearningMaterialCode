@@ -13,3 +13,5 @@ if (config["Default"]["Debug"] == "False"):
     debug = False
 
 server = config["Default"]["Server"]
+
+cors = config["Default"]["cors"]
