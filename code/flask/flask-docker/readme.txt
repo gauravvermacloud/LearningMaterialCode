@@ -1,1 +1,3 @@
-1. docker-compose up to start docker
+1. docker-compose up --build
+
+to start docker

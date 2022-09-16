@@ -1,7 +1,8 @@
-FROM python:3.6 as base
+FROM python:3.8.10 as base
 # Base image to be reused
 LABEL maintainer "Thiago Pacheco <hi@pacheco.io>"
 RUN apt-get update
+RUN /usr/local/bin/python -m pip install --upgrade pip
 WORKDIR /usr/src/app
 COPY ./requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
