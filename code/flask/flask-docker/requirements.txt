@@ -26,3 +26,5 @@ waitress==2.1.2
 wcwidth==0.2.5
 Werkzeug==2.2.2
 zipp==3.8.1
+gevent==22.10.2
+pyOpenSSL==22.1.0
