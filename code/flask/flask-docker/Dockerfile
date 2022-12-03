@@ -21,6 +21,8 @@ ENV PYTHONUNBUFFERED 1
 
 FROM base as prod
 # Production image
-RUN pip install gunicorn
+RUN pip install gunicorn`
 COPY . .
-CMD ["gunicorn", "--reload", "--bind", "0.0.0.0:5000", "app:app"]
+#CMD ["gunicorn", "--reload", "--bind", "0.0.0.0:5000", "app:app"]
+CMD ["python3 app.py"]
+#CMD ["echo Server-Started"]

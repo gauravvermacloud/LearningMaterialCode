@@ -1,3 +1,5 @@
+https://dev.to/pacheco/dockerize-a-flask-app-and-debug-with-vscode-34i1
+
 1. docker-compose up --build
 
 to start docker

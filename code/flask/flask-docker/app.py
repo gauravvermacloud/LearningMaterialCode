@@ -5,6 +5,7 @@ from apis.account_api import account_api
 import threading
 import _threading_local
 from flask import request
+from flask import Response
 from apis.exceptions import MyBaseException, MyDerivedException
 import config_reader
 from waitress import serve
@@ -14,7 +15,7 @@ from flask_cors import CORS
 from my_logger import wrap
 from gevent import pywsgi
 from OpenSSL import SSL
-
+from User import User
 
 app = Flask(__name__)
 app.register_blueprint(account_api)
@@ -29,6 +30,7 @@ def method_name():
     current_thrd = threading.currentThread()
     print(current_thrd.ident)
     print(current_thrd.my_prop)
+    print(str(current_thrd.user))
     return jsonify({"key": "1Value1"})
 
 
@@ -37,10 +39,27 @@ def before_request():
     current_thrd = threading.currentThread()
     print(current_thrd.ident)
     current_thrd.my_prop = "Test"
+    #Find from bearer header the User token and then assign it to User if none found we have an annonymoud session
+    user = User("test",["a","b","c"])
+    current_thrd.user = user
     print(current_thrd.my_prop)
+    print(request.__dict__)
 
+@app.after_request
+def after_request(response):
+    current_thrd = threading.currentThread()
+    print("ending request")
+    print(current_thrd.ident)
+    print(current_thrd.my_prop)
+    current_thrd.my_prop =None
+    #Make a user object from header for auth token and then crete and add to thread
+    #Log entire response
+    response.headers['RequestId'] = "Test"
+    #The risponse has the route rule and actual url
+    print(response.__dict__)
+    return response
 
-@ app.errorhandler(MyBaseException.MyBaseException)
+@app.errorhandler(MyBaseException.MyBaseException)
 def handle_not_found(e):
     return jsonify({"exception": "NotFound"}), 404
 
@@ -61,8 +80,10 @@ if __name__ == "__main__":
         serve(app, host=config_reader.host,
               port=config_reader.port
               )
+    
     if(config_reader.server == "Gevent"):
-        #pip3 install gevent
+        print("----------------- Starting Gevent on https 5000------------------------")
+        #   
         #https://serverfault.com/questions/224122/what-is-crt-and-key-files-and-how-to-generate-them
         #openssl genrsa 2048 > host.key
         #chmod 400 host.key
