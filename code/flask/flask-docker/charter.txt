@@ -4,7 +4,7 @@ D 2. Blueprint for routes
 D 4. Universal Request ID on Thread and header
 D 5. Session ID on Thread and Header
 D 6. Background Jobs
-7. Logging in Files
+D 7. Logging in Files
 8. Log reader into Debugging
 9. Web server log into DB with Universal Request ID
 D 10. Docker Debugging
