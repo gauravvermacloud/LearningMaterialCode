@@ -1,0 +1,1 @@
+https://medium.com/bb-tutorials-and-thoughts/setting-up-sonarqube-on-your-local-machine-for-python-projects-a5062a0bddfa
