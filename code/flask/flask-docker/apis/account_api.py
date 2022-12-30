@@ -16,7 +16,8 @@ def account_list():
     current_thrd = threading.currentThread()
     print(current_thrd.ident)
     print(current_thrd.my_prop)
-    return jsonify([1, 2, 3, 4])
+    result = jsonify([1, 2, 3, 4,])
+    return result
 
 
 @account_api.route("/account/id")

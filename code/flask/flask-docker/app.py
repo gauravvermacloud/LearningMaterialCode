@@ -39,11 +39,12 @@ def before_request():
     current_thrd = threading.currentThread()
     print(current_thrd.ident)
     current_thrd.my_prop = "Test"
-    #Find from bearer header the User token and then assign it to User if none found we have an annonymoud session
-    user = User("test",["a","b","c"])
+    # Find from bearer header the User token and then assign it to User if none found we have an annonymoud session
+    user = User("test", ["a", "b", "c"])
     current_thrd.user = user
     print(current_thrd.my_prop)
     print(request.__dict__)
+
 
 @app.after_request
 def after_request(response):
@@ -51,13 +52,14 @@ def after_request(response):
     print("ending request")
     print(current_thrd.ident)
     print(current_thrd.my_prop)
-    current_thrd.my_prop =None
-    #Make a user object from header for auth token and then crete and add to thread
-    #Log entire response
+    current_thrd.my_prop = None
+    # Make a user object from header for auth token and then crete and add to thread
+    # Log entire response
     response.headers['RequestId'] = "Test"
-    #The risponse has the route rule and actual url
+    # The risponse has the route rule and actual url
     print(response.__dict__)
     return response
+
 
 @app.errorhandler(MyBaseException.MyBaseException)
 def handle_not_found(e):
@@ -70,29 +72,29 @@ def handle_bad_request(e):
 
 
 if __name__ == "__main__":
-    if(config_reader.server == "Flask"):  
+    if (config_reader.server == "Flask"):
         app.run(
             debug=config_reader.debug,
             host=config_reader.host,
             port=config_reader.port
         )
-    if(config_reader.server == "Waitress"):
+    if (config_reader.server == "Waitress"):
         serve(app, host=config_reader.host,
               port=config_reader.port
               )
-    
-    if(config_reader.server == "Gevent"):
+
+    if (config_reader.server == "Gevent"):
         print("----------------- Starting Gevent on https 5000------------------------")
-        #   
-        #https://serverfault.com/questions/224122/what-is-crt-and-key-files-and-how-to-generate-them
-        #openssl genrsa 2048 > host.key
-        #chmod 400 host.key
-        #openssl req -new -x509 -nodes -sha256 -days 365 -key host.key -out host.cert
-        server = pywsgi.WSGIServer(('0.0.0.0', 5000), app, 
-                                   keyfile='host.key', 
+        #
+        # https://serverfault.com/questions/224122/what-is-crt-and-key-files-and-how-to-generate-them
+        # openssl genrsa 2048 > host.key
+        # chmod 400 host.key
+        # openssl req -new -x509 -nodes -sha256 -days 365 -key host.key -out host.cert
+        server = pywsgi.WSGIServer(('0.0.0.0', 5000), app,
+                                   keyfile='host.key',
                                    certfile='host.cert')
         server.serve_forever()
-    
+
 
 # To run with gunicorn ->>>>>  gunicorn --bind 0.0.0.0:5000 app:app
 # To run with mod_wsgi ->>>>>>>>> mod_wsgi-express start-server app.py --processes 4

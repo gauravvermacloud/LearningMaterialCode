@@ -11,7 +11,7 @@ def wrap():
             """ Actual wrapping """
             current_thrd = threading.currentThread()
             print(current_thrd.ident)
-            if(hasattr(current_thrd,"my_prop")):    
+            if (hasattr(current_thrd, "my_prop")):
                 print(current_thrd.my_prop)
             entering(func)
             result = func(*args, **kwargs)
