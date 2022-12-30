@@ -5,6 +5,7 @@ from flask import Blueprint, jsonify
 from apis.exceptions import MyBaseException, MyDerivedException
 from my_logger import wrap
 import threading
+import logging
 
 
 account_api = Blueprint('account_api', __name__)
@@ -17,6 +18,7 @@ def account_list():
     print(current_thrd.ident)
     print(current_thrd.my_prop)
     result = jsonify([1, 2, 3, 4,])
+    logging.debug("returning inside method log " + str([1, 2, 3, 4,]))
     return result
 
 

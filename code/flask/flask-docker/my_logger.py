@@ -1,6 +1,13 @@
 from functools import wraps
 import inspect
 import threading
+import logging
+
+
+logging.basicConfig(handlers=[
+    logging.FileHandler("debug.log"),
+    logging.StreamHandler()
+], format='%(asctime)s ~ %(levelname)s ~  %(threadName)-12.12s ~ %(process)d ~ %(funcName)s ~ %(lineno)d ~ %(message)s', encoding='utf-8', level=logging.DEBUG)
 
 
 def wrap():
@@ -10,9 +17,9 @@ def wrap():
         def call(*args, **kwargs):
             """ Actual wrapping """
             current_thrd = threading.currentThread()
-            print(current_thrd.ident)
+            logging.debug(current_thrd.ident)
             if (hasattr(current_thrd, "my_prop")):
-                print(current_thrd.my_prop)
+                logging.debug(current_thrd.my_prop)
             entering(func)
             result = func(*args, **kwargs)
             exiting(func)
@@ -23,7 +30,7 @@ def wrap():
 
 def entering(func):
     """ Pre function logging """
-    print("entering function ==============> "+func.__name__)
+    logging.debug("entering function ==============> "+func.__name__)
     source = inspect.getsource(func)
     index = source.find("def ")
     decs = [
@@ -37,6 +44,6 @@ def entering(func):
 
 def exiting(func):
     """ Post function logging """
-    print("exiting function ==============> "+func.__name__)
+    logging.debug("exiting function ==============> "+func.__name__)
 
 # https://towardsdatascience.com/using-wrappers-to-log-in-python-ccffe4c46b54

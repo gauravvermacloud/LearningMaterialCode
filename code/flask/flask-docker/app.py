@@ -16,6 +16,13 @@ from my_logger import wrap
 from gevent import pywsgi
 from OpenSSL import SSL
 from User import User
+import logging
+
+
+logging.basicConfig(handlers=[
+    logging.FileHandler("debug.log"),
+    logging.StreamHandler()
+], format='%(asctime)s ~ %(levelname)s ~  %(threadName)-12.12s ~ %(process)d ~ %(funcName)s ~ %(lineno)d ~ %(message)s', encoding='utf-8', level=logging.DEBUG)
 
 app = Flask(__name__)
 app.register_blueprint(account_api)
@@ -25,39 +32,39 @@ cors = CORS(app, resources={r"/*": {"origins": config_reader.cors}})
 @app.route('/api/test', methods=["GET"])
 @wrap()
 def method_name():
-    print("Before Return -1")
+    logging.debug("Before Return -1")
 
     current_thrd = threading.currentThread()
-    print(current_thrd.ident)
-    print(current_thrd.my_prop)
-    print(str(current_thrd.user))
+    logging.debug(current_thrd.ident)
+    logging.debug(current_thrd.my_prop)
+    logging.debug(str(current_thrd.user))
     return jsonify({"key": "1Value1"})
 
 
 @app.before_request
 def before_request():
     current_thrd = threading.currentThread()
-    print(current_thrd.ident)
+    logging.debug(current_thrd.ident)
     current_thrd.my_prop = "Test"
     # Find from bearer header the User token and then assign it to User if none found we have an annonymoud session
     user = User("test", ["a", "b", "c"])
     current_thrd.user = user
-    print(current_thrd.my_prop)
-    print(request.__dict__)
+    logging.debug(current_thrd.my_prop)
+    logging.debug(request.__dict__)
 
 
 @app.after_request
 def after_request(response):
     current_thrd = threading.currentThread()
-    print("ending request")
-    print(current_thrd.ident)
-    print(current_thrd.my_prop)
+    logging.debug("ending request")
+    logging.debug(current_thrd.ident)
+    logging.debug(current_thrd.my_prop)
     current_thrd.my_prop = None
     # Make a user object from header for auth token and then crete and add to thread
     # Log entire response
     response.headers['RequestId'] = "Test"
     # The risponse has the route rule and actual url
-    print(response.__dict__)
+    logging.debug(response.__dict__)
     return response
 
 
@@ -84,7 +91,8 @@ if __name__ == "__main__":
               )
 
     if (config_reader.server == "Gevent"):
-        print("----------------- Starting Gevent on https 5000------------------------")
+        logging.debug(
+            "----------------- Starting Gevent on https 5000------------------------")
         #
         # https://serverfault.com/questions/224122/what-is-crt-and-key-files-and-how-to-generate-them
         # openssl genrsa 2048 > host.key
