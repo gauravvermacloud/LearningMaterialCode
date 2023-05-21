@@ -1,0 +1,3 @@
+https://realpython.com/token-based-authentication-with-flask/
+
+https://auth0.com/blog/how-to-handle-jwt-in-python/
