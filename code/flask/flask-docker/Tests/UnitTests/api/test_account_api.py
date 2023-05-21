@@ -36,5 +36,7 @@ class test_account_api(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_raise_base_exception(self):
-        with self.assertRaises(MyBaseException.MyBaseException):
+        with self.assertRaises(MyBaseException.MyBaseException) as ex:
             raise_base_exception()
+
+        print(str(ex))

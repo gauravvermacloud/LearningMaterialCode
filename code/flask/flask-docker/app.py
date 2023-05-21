@@ -112,6 +112,10 @@ if __name__ == "__main__":
 # https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/How-to-setup-Nginx-reverse-proxy-servers-by-example
 
 # nginx
+# This link works
+# https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/How-to-setup-Nginx-reverse-proxy-servers-by-example
+
+
 # https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/
 # http://nginx.org/en/docs/http/load_balancing.html
 

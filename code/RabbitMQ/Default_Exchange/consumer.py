@@ -1,29 +1,24 @@
-import constants
 import pika
 
-
-def call_back(channel, method, properties, body):
-    print(body)
-
-
-# Create a server connection with given address
 connection = pika.BlockingConnection(
-    pika.ConnectionParameters(constants.SERVER_ADDRESS))
-
-# Based on connection create a channel
+    pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 
-# Now create a fanout exchange
-channel.exchange_declare(
-    exchange=constants.EXCHANGE_NAME, exchange_type='fanout')
+channel.exchange_declare(exchange='logs', exchange_type='fanout')
 
-# Create a queue if needed and define the queue . This will be the queue where messages will be published
-channel.queue_declare(constants.QUEUE_NAME)
+result = channel.queue_declare(queue='', exclusive=True)
+queue_name = result.method.queue
+
+channel.queue_bind(exchange='logs', queue=queue_name)
+
+print(' [*] Waiting for logs. To exit press CTRL+C')
 
 
-# bind the queue to callback
-channel.basic_consume(queue=constants.QUEUE_NAME,
-                      on_message_callback=call_back, auto_ack=True)
+def callback(ch, method, properties, body):
+    print(" [x] %r" % body)
 
-# Now start consuming messages
+
+channel.basic_consume(
+    queue=queue_name, on_message_callback=callback, auto_ack=True)
+
 channel.start_consuming()

@@ -27,7 +27,7 @@ def account_by_id():
     return jsonify({"id": 1})
 
 
-@account_api.route("/raise_baise")
+@account_api.route("/raise_base")
 def raise_base_exception():
     raise MyBaseException.MyBaseException
 

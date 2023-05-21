@@ -1,5 +1,5 @@
 SERVER_ADDRESS = "localhost"
-DEFAULT_EXCHANGE_NAME = ""
-QUEUE_NAME = "Queue_For_Default_Exchange"
+EXCHANGE_NAME = ''
+QUEUE_NAME = ''
 SAMPLE_MESSAGE_FORMAT = "HELLO Number {}"
 SLEEP_TIME = 5
