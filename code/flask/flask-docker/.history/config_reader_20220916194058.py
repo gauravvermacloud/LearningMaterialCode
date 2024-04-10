@@ -20,7 +20,3 @@ is_scheduler_enabled = True
 
 if (config["Default"]["is_scheduler_enabled"] == "False"):
     is_scheduler_enabled = False
-
-is_ssl_enabled = False
-if (config["Default"]["is_ssl_enabled"] == "True"):
-    is_ssl_enabled = True

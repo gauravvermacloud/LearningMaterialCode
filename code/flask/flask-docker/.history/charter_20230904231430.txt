@@ -41,4 +41,3 @@
 
 35. Liquibase for DB
 36. Queue
-37. Ansible

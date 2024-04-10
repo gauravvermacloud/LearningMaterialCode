@@ -85,6 +85,9 @@ def before_request():
 
     # request.headers.set("X-Universal-Request-Id", current_thrd.my_prop)
 
+    response = make_response()
+    response.headers["X-Universal-Request-Id"] = current_thrd.my_prop
+
     # From the request find the bearer token and decode it
     Authorization_Header = request.headers.get("Authorization")
     if Authorization_Header != None:
@@ -110,11 +113,10 @@ def after_request(response):
     logging.debug("ending request")
     logging.debug(current_thrd.ident)
     logging.debug(current_thrd.my_prop)
+    current_thrd.my_prop = None
     # Make a user object from header for auth token and then crete and add to thread
     # Log entire response
     response.headers["RequestId"] = "Test"
-    response.headers["X-Universal-Request-Id"] = current_thrd.my_prop
-    current_thrd.my_prop = None
     # The risponse has the route rule and actual url
     current_thrd.user = None
     logging.debug(response.__dict__)

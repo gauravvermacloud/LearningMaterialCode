@@ -1,4 +1,0 @@
-https://www.imaginarycloud.com/blog/flask-python/
-
-
-https://github.com/flasgger/flasgger

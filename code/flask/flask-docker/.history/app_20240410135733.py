@@ -110,11 +110,11 @@ def after_request(response):
     logging.debug("ending request")
     logging.debug(current_thrd.ident)
     logging.debug(current_thrd.my_prop)
+    current_thrd.my_prop = None
     # Make a user object from header for auth token and then crete and add to thread
     # Log entire response
     response.headers["RequestId"] = "Test"
     response.headers["X-Universal-Request-Id"] = current_thrd.my_prop
-    current_thrd.my_prop = None
     # The risponse has the route rule and actual url
     current_thrd.user = None
     logging.debug(response.__dict__)

@@ -40,5 +40,4 @@
 34. Sample code for DB access using SQL Aclhemy
 
 35. Liquibase for DB
-36. Queue
-37. Ansible
+36. 

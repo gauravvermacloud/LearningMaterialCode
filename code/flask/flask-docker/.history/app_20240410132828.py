@@ -1,6 +1,6 @@
 from distutils.command.config import config
 from distutils.log import debug
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify
 from apis.account_api import account_api
 from apis.auth_api import auth_api
 import threading
@@ -18,8 +18,7 @@ from gevent import pywsgi
 from OpenSSL import SSL
 from User import User
 import logging
-
-# from flasgger import Swagger
+from flasgger import Swagger
 from jwt import decode as decode
 
 logging.basicConfig(
@@ -82,9 +81,7 @@ def before_request():
     current_thrd = threading.currentThread()
     logging.debug(current_thrd.ident)
     current_thrd.my_prop = "Test"
-
-    # request.headers.set("X-Universal-Request-Id", current_thrd.my_prop)
-
+    request.headers.set("X-Universal-Request-Id", current_thrd.my_prop)
     # From the request find the bearer token and decode it
     Authorization_Header = request.headers.get("Authorization")
     if Authorization_Header != None:
@@ -110,11 +107,10 @@ def after_request(response):
     logging.debug("ending request")
     logging.debug(current_thrd.ident)
     logging.debug(current_thrd.my_prop)
+    current_thrd.my_prop = None
     # Make a user object from header for auth token and then crete and add to thread
     # Log entire response
     response.headers["RequestId"] = "Test"
-    response.headers["X-Universal-Request-Id"] = current_thrd.my_prop
-    current_thrd.my_prop = None
     # The risponse has the route rule and actual url
     current_thrd.user = None
     logging.debug(response.__dict__)
